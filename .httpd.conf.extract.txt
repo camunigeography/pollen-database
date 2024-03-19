@@ -1,0 +1,55 @@
+# Application Apache directives
+
+# Load using:
+#	# Pollen database
+#	Include /path/to/pollen-database/.httpd.conf.extract.txt
+#	Use MacroPollenDatabase /pollen
+
+
+<Macro MacroPollenDatabase $baseUrl>
+	
+	# Front controller application support
+	Use MacroFrontControllerApplication "$baseUrl/" "Pollen database"
+	
+	# Application routing
+	RewriteEngine on
+	RewriteRule ^$baseUrl/(copyright|help|links).html$ $baseUrl/index.html?action=$1 [L]
+	RewriteRule ^$baseUrl/(articles|search)/$ $baseUrl/index.html?action=$1 [L]
+	RewriteRule ^$baseUrl/articles/(add|clear|dump).html$ $baseUrl/index.html?action=$1 [L]
+	RewriteRule ^$baseUrl/(articles)/([0-9a-zA-Z]+).html$ $baseUrl/index.html?action=$1&orderby=$2 [L]
+	RewriteRule ^$baseUrl/(articles)/([0-9a-zA-Z]+),([0-9]+).html$ $baseUrl/index.html?action=$1&orderby=$2&page=$3 [L]
+	RedirectMatch Permanent ^$baseUrl/(articles|search)$ $baseUrl/$1/
+	RewriteRule ^$baseUrl/(search)/(.+) $baseUrl/index.html?action=$1&item=$2 [L]
+	RewriteRule ^$baseUrl/articles/([0-9]+)/$ $baseUrl/index.html?action=article&item=$1 [L]
+	RewriteRule ^$baseUrl/articles/([0-9]+)/full.html$ $baseUrl/index.html?action=article&item=$1&full=true [L]
+	RedirectMatch Permanent ^$baseUrl/articles/([0-9]+)$ $baseUrl/articles/$1/
+	RewriteRule ^$baseUrl/articles/([0-9]+)/(edit|clone|delete).html$ $baseUrl/index.html?action=$2&item=$1 [L]
+	RewriteRule ^$baseUrl/articles/([0-9]+)/(editmaterial|editmedia|addmaterial|addmaterialmedia|addmedia).html$ $baseUrl/index.html?action=$2&item=$1 [L,QSA]
+	
+	<Location $baseUrl/>
+		php_value output_buffering 524288
+	</Location>
+	
+	# Richtext editor
+	<Location /_ckeditor>
+		php_admin_value auto_prepend_file none
+		php_admin_value auto_append_file none
+	</Location>
+	
+	# External login
+#	# Currently disabled, as performance is poor, causing MySQL to exhaust connections sometimes; this should be reachitected within the application
+#	Alias /_ckeditor2/ /path/to/_ckeditor/
+#	DBDriver mysql
+#	DBDParams "host=... user=... pass=... dbname=pollen"
+#	<LocationMatch ^($baseUrl/loginexternal.html|/_ckeditor2)>
+#		AuthType basic
+#		AuthName "Login for external users"
+#		AuthBasicProvider dbd
+#		AuthDBDUserPWQuery "SELECT password FROM administrators WHERE username__JOIN__people__people__reserved = %s AND userType = 'External' and active = 'Yes'"
+#		Require valid-user
+#	</LocationMatch>
+
+	# Data editing
+	Use MacroSinenomineEmbeddedWholeDb "$baseUrl" "/data" "editing"
+
+</Macro>

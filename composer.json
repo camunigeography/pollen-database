@@ -1,0 +1,15 @@
+{
+    "name": "camunigeography/pollen-database",
+    "description": "Pollen database",
+    "type": "project",
+    "license": "GPL-3.0-only",
+    "minimum-stability": "stable",
+    "require": {
+        "libpurecontent/frontcontrollerapplication": "^1.13",
+        "libpurecontent/pagination": "^1.1",
+        "libpurecontent/application": "^1.9"
+    },
+    "autoload": {
+        "files": ["pollenDatabase.php"]
+    }
+}

@@ -1,0 +1,38 @@
+#pollendatabase table.media {min-width: 600px;}
+#pollendatabase table.media td.value h3 {margin-top: 0; padding-top: 0; font-size: larger;}
+#pollendatabase table.media td.value p.source {margin-top: 5em;}
+@media screen {
+	#pollendatabase table.media td img {width: 250px;}
+}
+#pollendatabase ul.boxylist {margin: 20px 0 20px 30px;}
+#pollendatabase ul.boxylist li.listall {border-color: gray;}
+#pollendatabase ul.boxylist form {margin: 10px;}
+#pollendatabase p.smaller {font-size: 0.8em;}
+#pollendatabase p.nullimage {font-style: italic; color: #bbb; display: block; padding: 5px; border: 1px dashed #ddd;}
+#pollendatabase table.lines.regulated td.key {width: 265px;}
+#pollendatabase table.lines.regulated table td.key {width: 150px;}
+#pollendatabase td.key a {border-bottom: 0;}
+#pollendatabase hr.pagebreak {page-break-after: always; height: 4px;}
+#pollendatabase h3#media {page-break-before: always;}
+#pollendatabase table.articles th a {padding: 2px; display: block; border: 0;}
+#pollendatabase table.articles th a.selected {background-color: #eee;}
+#pollendatabase table.articles td {width: 120px;}
+#pollendatabase table.articles td.materials, #pollendatabase table.articles td.media, #pollendatabase table.articles td.view, #pollendatabase table.articles td.edit {width: 35px;}
+/*#pollendatabase .articlesearch form select option[value=""] {background-color: red;} */
+#pollendatabase div.pollen {background-color: #fefefe; border: 2px solid #ddd; border-top-width: 1px; border-left-width: 1px; -moz-border-radius: 5px; margin-top: 20px; padding: 10px;}
+#pollendatabase div.material {margin-left: 25px; background-color: #fefefe; border: 2px solid #ddd; border-top-width: 1px; border-left-width: 1px; -moz-border-radius: 5px; margin-top: 20px; padding: 10px;}
+#pollendatabase h3 {margin-top: 3em;}
+body#pollendatabase div.pollen h3 {margin-top: 0;}
+#pollendatabase img.icon {width: 16px; height: 16px; border: 0;}
+#pollendatabase div.material h4 {margin-top: 0;}
+#pollendatabase div.material ul.actions, #pollendatabase div.media ul.actions {position: relative; top: -3em;}
+#pollendatabase div.material ul.actions.inline, #pollendatabase div.media ul.actions.inline {position: normal; top: 0;}
+#pollendatabase div.media {margin-left: 25px; border: 2px solid #ddd; border-top-width: 1px; border-left-width: 1px; -moz-border-radius: 5px; margin-top: 20px; padding: 10px;}
+#pollendatabase div.material div.media {clear: right;}
+#pollendatabase div.material div.media ul.actions li a {width: 173px;}
+#pollendatabase div.ultimateform {clear: right;}
+
+@media print {
+	#pollendatabase, #pollendatabase #container {margin: 0; padding: 0; width: auto;}
+	#pollendatabase ul.tabs, #pollendatabase h4#tabsheading {display: none;}
+}

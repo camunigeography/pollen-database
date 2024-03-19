@@ -1,0 +1,17 @@
+<?php
+
+# Settings
+$settings = array (
+	'applicationName' => 'Pollen database',
+	'username' => 'my_username',
+	'password' => 'my_password',
+	'collectionName' => 'Example Collection',
+	'copyrightOwner' => "St Botolph's College and respective authors",
+	'introductionHtml' => '',
+);
+
+# Load and run the application with the above settings
+require_once ('vendor/autoload.php');
+new templateApplication ($settings);
+
+?>
