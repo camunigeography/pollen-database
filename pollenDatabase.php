@@ -1004,7 +1004,7 @@ class pollenDatabase extends frontControllerApplication
 					$html .= "<li><a rel=\"nofollow\" href=\"{$this->baseUrl}/articles/{$article}/#material{$materialId}\"><img src=\"/images/icons/table_delete.png\" alt=\"Cancel\" /> Cancel editing</a></li>";
 				} else {
 					$html .= "<li><a rel=\"nofollow\" href=\"{$this->baseUrl}/articles/{$article}/editmaterial.html?record={$materialId}#material{$materialId}\"><img src=\"/images/icons/image_edit.png\" alt=\"Edit\" /> Edit this material</a></li>";
-					$html .= "<li><a rel=\"nofollow\" target=\"_blank\" href=\"{$this->baseUrl}/data/materials/{$materialId}/delete.html#material{$materialId}\"><img src=\"/images/icons/cross.png\" alt=\"Delete\" /> Delete this material</a></li>";
+					$html .= "<li><a rel=\"nofollow\" target=\"_blank\" href=\"{$this->baseUrl}/data/materials/{$materialId}/delete.html#material{$materialId}\"><img src=\"/images/icons/cross.png\" alt=\"Delete\" /> Delete this material&hellip;</a></li>";
 				}
 				$html .= "</ul>";
 				
@@ -1331,7 +1331,7 @@ class pollenDatabase extends frontControllerApplication
 			$html .= "<li><a rel=\"nofollow\" href=\"{$this->baseUrl}/articles/{$article}/#media{$key}\"><img src=\"/images/icons/picture_delete.png\" alt=\"Cancel\" /> Cancel editing</a></li>";
 		} else {
 			$html .= "<li><a rel=\"nofollow\" href=\"{$this->baseUrl}/articles/{$article}/editmedia.html?record={$key}#media{$key}\"><img src=\"/images/icons/picture_edit.png\" alt=\"Edit\" /> Edit this media</a></li>";
-			$html .= "<li><a rel=\"nofollow\" target=\"_blank\" href=\"{$this->baseUrl}/data/media/{$key}/delete.html\"><img src=\"/images/icons/cross.png\" alt=\"Delete\" /> Delete this media</a></li>";
+			$html .= "<li><a rel=\"nofollow\" target=\"_blank\" href=\"{$this->baseUrl}/data/media/{$key}/delete.html\"><img src=\"/images/icons/cross.png\" alt=\"Delete\" /> Delete this media&hellip;</a></li>";
 		}
 		$html .= "\n</ul>";
 		
