@@ -17,7 +17,7 @@
 	RewriteRule ^$baseUrl/(articles|search)/$ $baseUrl/index.html?action=$1 [L]
 	RewriteRule ^$baseUrl/articles/(add|clear|dump).html$ $baseUrl/index.html?action=$1 [L]
 	RewriteRule ^$baseUrl/(articles)/([0-9a-zA-Z]+).html$ $baseUrl/index.html?action=$1&orderby=$2 [L]
-	RewriteRule ^$baseUrl/(articles)/([0-9a-zA-Z]+),([0-9]+).html$ $baseUrl/index.html?action=$1&orderby=$2&page=$3 [L]
+	RewriteRule ^$baseUrl/(articles)/([0-9a-zA-Z]+),page([0-9]+).html$ $baseUrl/index.html?action=$1&orderby=$2&page=$3 [L]
 	RedirectMatch Permanent ^$baseUrl/(articles|search)$ $baseUrl/$1/
 	RewriteRule ^$baseUrl/(search)/(.+) $baseUrl/index.html?action=$1&item=$2 [L]
 	RewriteRule ^$baseUrl/articles/([0-9]+)/$ $baseUrl/index.html?action=article&item=$1 [L]

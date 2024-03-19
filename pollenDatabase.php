@@ -541,7 +541,7 @@ class pollenDatabase extends frontControllerApplication
 		if (!isSet ($_GET['orderby']) && !isSet ($_GET['page'])) {
 			if (isSet ($_SESSION['orderby']) && isSet ($_SESSION['page'])) {
 				if (in_array ($_SESSION['orderby'], $orderby) && is_numeric ($_SESSION['page'])) {	// Page could be checked further
-					$location = 'https://' . $_SERVER['SERVER_NAME'] . $this->baseUrl . "/articles/{$_SESSION['orderby']},{$_SESSION['page']}.html";
+					$location = 'https://' . $_SERVER['SERVER_NAME'] . $this->baseUrl . "/articles/{$_SESSION['orderby']},page{$_SESSION['page']}.html";
 					header ("Location: {$location}");
 					return;
 				}
@@ -587,8 +587,7 @@ class pollenDatabase extends frontControllerApplication
 		$html  = "\n<p>There " . ($totalArticles == 1 ? 'is one taxon' : "are {$totalArticles} taxa") .  (($totalArticles != $articlesShown) ? ', of which ' . ($articlesShown == 1 ? 'one is shown' : "{$articlesShown} are shown") : '') . ':</p>';
 		
 		# Add in pagination links
-		list ($paginationListHtml, $orderbyListHtml) = $this->paginationList ($orderby, $totalPages, $page, $masterPattern = '%orderby,%pagenumber.html', $separator = ' ', $addWords = false, $masterPage1 = './');
-		$html .= $paginationListHtml;
+		$html .= pagination::paginationLinks ($page, $totalPages, $this->baseUrl . '/articles/' . $firstOrderby . ',');
 		
 		# Rearrange the table
 		foreach ($data as $key => $article) {
@@ -693,54 +692,6 @@ class pollenDatabase extends frontControllerApplication
 		
 		# Return the data
 		return ($page ? array ($data, $totalRecords, $totalPages, $page) : $data);
-	}
-	
-	
-	# Function to create a pagination list in HTML
-	private function paginationList ($orderbyTypes, $totalPages, $page, $masterPattern = '%orderby,%pagenumber.html', $separator = ' | ', $addWords = false, $masterPage1 = './')
-	{
-		# If there is only one page, return an empty paragraph
-		if ($totalPages == 1) {
-			$paginationListHtml = '';
-		} else {
-			
-			# Determine which to order by
-			$orderby = ($this->arguments['orderby'] ? $this->arguments['orderby'] : $orderbyTypes[0]);
-			
-			# Embed ordering in the links if necessary
-			$pattern = str_replace ('%orderby', ($orderby ? "{$this->arguments['orderby']}" : ''), $masterPattern);
-			$page1 = $masterPage1 . ($this->arguments['orderby'] ? "{$this->arguments['orderby']}.html" : '');
-			
-			# Start
-			$fragments[] = ($page == 1 ? '<span>&laquo;' . ($addWords ? '&nbsp;First' : '') . '</span>' : '<a href="' . ($masterPage1 ? $page1 : str_replace ('%pagenumber', 1, $pattern)) . '">&laquo;' . ($addWords ? '&nbsp;First' : '') . '</a>');
-			$fragments[] = ($page == 1 ? '<span>&lt;' . ($addWords ? '&nbsp;Previous' : '') . '</span>' : '<a href="' . (($masterPage1 && $page == 1) ? $page1 : str_replace ('%pagenumber', ($page - 1), $pattern)) . '">&lt;' . ($addWords ? '&nbsp;Previous' : '') . '</a>');
-			
-			# Links
-			for ($i = 1; $i <= $totalPages; $i++) {
-				$fragments[] = ($page == $i ? '<strong>' . ($addWords ? 'Page ' : '') . $i . '</strong>' : '<a href="' . (($masterPage1 && $i == 1) ? $page1 : str_replace ('%pagenumber', $i, $pattern)) . '">' . ($addWords ? 'Page ' : '') . "$i</a>");
-			}
-			
-			# End
-			$fragments[] = ($page == $totalPages ? '<span>' . ($addWords ? 'Next&nbsp;' : '') . 'next &gt;</span>' : '<a href="' . str_replace ('%pagenumber', ($page + 1), $pattern) . '">' . ($addWords ? 'Next&nbsp;' : '') . 'next &gt;</a>');
-			$fragments[] = ($page == $totalPages ? '<span>' . ($addWords ? 'Last&nbsp;' : '') . '&raquo;</span>' : '<a href="' . str_replace ('%pagenumber', ($totalPages), $pattern) . '">' . ($addWords ? 'Last&nbsp;' : '') . '&raquo;</a>');
-			
-			# Compile the pagination list HTML
-			$paginationListHtml = "\n" . '<p class="pagination">' . ($addWords ? '' : ucfirst ($orderby) . ': page: ') . implode ($separator, $fragments) . '</p>';
-		}
-		
-		# Compile the order-by list HTML
-		if (count ($orderbyTypes) == 1) {
-			$orderbyListHtml = '';
-		} else {
-			foreach ($orderbyTypes as $orderby => $databaseColumnName) {
-				$link = ($page == 1 ? "{$masterPage1}{$orderby}.html" : str_replace (array ('%pagenumber', '%orderby'), array ($page, "{$orderby}"), $masterPattern));
-				$orderbyFragments[] = (($this->arguments['orderby'] == $orderby) ? '<strong>' : "<a href=\"{$link}\">") . ucfirst ($orderby) . (($this->arguments['orderby'] == $orderby) ? '</strong>' : '</a>');
-			}
-			$orderbyListHtml = "\n" . '<p class="orderby">Order by: ' . implode ($separator, $orderbyFragments) . '</p>';
-		}
-		
-		# Return the HTML
-		return array ($paginationListHtml, $orderbyListHtml);
 	}
 	
 	
