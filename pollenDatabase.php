@@ -587,7 +587,8 @@ class pollenDatabase extends frontControllerApplication
 		$html  = "\n<p>There " . ($totalArticles == 1 ? 'is one taxon' : "are {$totalArticles} taxa") .  (($totalArticles != $articlesShown) ? ', of which ' . ($articlesShown == 1 ? 'one is shown' : "{$articlesShown} are shown") : '') . ':</p>';
 		
 		# Add in pagination links
-		$html .= pagination::paginationLinks ($page, $totalPages, $this->baseUrl . '/articles/' . $firstOrderby . ',');
+		$paginationListHtml = pagination::paginationLinks ($page, $totalPages, $this->baseUrl . '/articles/' . $firstOrderby . ',');
+		$html .= $paginationListHtml;
 		
 		# Rearrange the table
 		foreach ($data as $key => $article) {
@@ -610,7 +611,7 @@ class pollenDatabase extends frontControllerApplication
 		
 		# Compile the HTML
 		$html .= application::htmlTable ($data, $replacements, $class = 'lines articles', $showKey = false, $uppercaseHeadings = true, $allowHtml = true, $showColons = false, $addCellClasses = true, $addRowKeys = false);
-		$html .= $paginationListHtml;
+		$html .= "\n<br />" . $paginationListHtml;
 		
 		# Link to a mass dump of records
 		if ($this->userIsAdministrator) {
