@@ -355,6 +355,7 @@ class pollenDatabase extends frontControllerApplication
 	public function home ()
 	{
 		# Start the HTML
+		$html = '';
 		
 		# Define edit link
 		$editLink = '';
