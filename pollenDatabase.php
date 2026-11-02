@@ -1534,7 +1534,7 @@ class pollenDatabase extends frontControllerApplication
 		);
 		
 		# Hand off to the default editor, which will echo the HTML
-		parent::editing ($attributes, $deny = false /* i.e. administrators table */, $sinenomineExtraSettings);
+		echo parent::editing ($attributes, $deny = false /* i.e. administrators table */, $sinenomineExtraSettings);
 	}
 }
 
