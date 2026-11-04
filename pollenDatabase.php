@@ -446,7 +446,6 @@ class pollenDatabase extends frontControllerApplication
 		$form = new form (array (
 			'displayRestrictions' => false,
 			'formCompleteText' => false,
-			'escapeOutput' => true,
 			'databaseConnection' => $this->databaseConnection,
 			'div' => 'ultimateform article',
 			'reappear' => true,
@@ -456,7 +455,6 @@ class pollenDatabase extends frontControllerApplication
 			'submitButtonAccesskey' => false,
 			'nullText'	=> false,
 			'requiredFieldIndicator' => false,
-			'escapeOutput' => true,
 		));
 		
 		# Get the data
@@ -483,7 +481,7 @@ class pollenDatabase extends frontControllerApplication
 		}
 		
 		# Form widgets
-		$form->select (array ( 
+		$form->select (array (
 		    'name'		=> 'family',
 		    'title'		=> 'Family',
 		    'values'	=> $family,
@@ -491,14 +489,14 @@ class pollenDatabase extends frontControllerApplication
 			'default'	=> (isSet ($_SESSION['family']) ? $_SESSION['family'] : ''),
 			'forceAssociative' => true,	// Ensures index is kept
 		));
-		$form->select (array ( 
+		$form->select (array (
 		    'name'		=> 'genus',
 		    'title'		=> 'Genus',
 			'values'	=> $genus,
 			'nullText'	=> '[Genus]',
 			'default'	=> (isSet ($_SESSION['genus']) ? $_SESSION['genus'] : ''),
 		));
-		$form->select (array ( 
+		$form->select (array (
 		    'name'		=> 'species',
 		    'title'		=> 'Species',
 		    'values'	=> $species,
@@ -1102,7 +1100,6 @@ class pollenDatabase extends frontControllerApplication
 			'submitTo' => $location,
 			'displayRestrictions' => false,
 			'formCompleteText' => false,
-			'escapeOutput' => true,
 			'databaseConnection' => $this->databaseConnection,
 			'div' => 'ultimateform article',
 			'cols' => 60,
@@ -1468,7 +1465,6 @@ class pollenDatabase extends frontControllerApplication
 			'submitButtonText' => 'Search!',
 			'formCompleteText' => false,
 			'reappear' => true,
-			'escapeOutput' => true,
 			'submitTo' => $this->baseUrl . '/search/',
 		));
 		$form->input (array (
